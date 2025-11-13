@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Past the Lake Festival</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #89f7fe 0%, #66a6ff 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .header-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    @media (min-width: 768px) {
+      .header-flex {
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+      }
+    }
+
+    /* 🌟 Floating + glowing logo */
+    .logo {
+      width: 160px;
+      height: auto;
+      animation: float 4s ease-in-out infinite, glow 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(255,224,102,0.8));
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 25px rgba(255,255,180,1))
+              drop-shadow(0 0 45px rgba(255,255,180,0.9))
+              hue-rotate(20deg);
+      transform: scale(1.05);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(255,224,102,0.7))
+                drop-shadow(0 0 15px rgba(255,224,102,0.4));
+      }
+      50% {
+        filter: drop-shadow(0 0 20px rgba(255,224,102,1))
+                drop-shadow(0 0 30px rgba(255,224,102,0.8));
+      }
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    header p { font-size: 1.2rem; margin-top: 10px; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover { color: #ffe066; }
+
+    section { padding: 80px 20px; text-align: center; }
+
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 120px 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 200px;
+      background: rgba(255,255,255,0.3);
+      opacity: 0.5;
+      transform-origin: top left;
+      animation: wave 10s infinite linear;
+    }
+
+    @keyframes wave {
+      0% { transform: translateX(0) translateY(0) rotate(0deg); }
+      50% { transform: translateX(-50%) translateY(10px) rotate(1deg); }
+      100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    }
+
+    .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
+
+    .tickets {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .ticket {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 30px;
+      width: 280px;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+
+    .ticket:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .ticket h3 { font-size: 1.6rem; margin-bottom: 10px; }
+    .ticket p { font-size: 1rem; margin-bottom: 15px; }
+
+    .ticket button {
+      background: #ffe066;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .ticket button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .merch {
+      background: rgba(0,0,0,0.3);
+      padding: 50px 20px;
+    }
+
+    .merch img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .merch img:hover { transform: scale(1.03); }
+
+    .lineup {
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.2);
+      padding: 40px 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .lineup h2 { text-align: center; margin-bottom: 20px; font-size: 2rem; }
+
+    .lineup ul {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+      column-gap: 40px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
+      opacity: 0;
+    }
+
+    .lineup.show ul {
+      max-height: 1200px;
+      opacity: 1;
+    }
+
+    .lineup li { margin-bottom: 8px; font-size: 1rem; }
+
+    /* ✨ Interactive glow pulse button */
+    .toggle-btn {
+      display: block;
+      background: #ffe066;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      margin: 15px auto 0;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 10px rgba(255, 224, 102, 0.6);
+      animation: glow 2.5s ease-in-out infinite;
+    }
+
+    .toggle-btn:hover {
+      background: #fffbe6;
+      color: #000;
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(255,255,200,1),
+                  0 0 45px rgba(255,255,180,0.8);
+      filter: hue-rotate(20deg);
+    }
+
+    footer {
+      background: rgba(0,0,0,0.6);
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+    }
+
+    footer a { color: #ffe066; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .tickets { flex-direction: column; align-items: center; }
+      .lineup ul { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header-flex">
+    <img src="Untitled Project - Wavy Cozy Clothing.png" alt="Past the Lake Festival Logo" class="logo" />
+    <div>
+      <h1>Past the Lake Festival</h1>
+      <p>Where the beats float and the crowd flows 🌊🎶</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#tickets">Tickets</a>
+    <a href="#merch">Merch</a>
+    <a href="#lineup">Line-up</a>
+    <a href="#info">Info</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Experience music like never before</h2>
+    <p>DJs performing live on a floating stage while you dance on the beach under the stars.</p>
+  </section>
+
+  <section id="tickets">
+    <h2>🎟️ Get Your Tickets</h2>
+    <div class="tickets">
+      <div class="ticket">
+        <h3>General Admission</h3>
+        <p>Access to the beach area and all main performances.</p>
+        <p><strong>$99</strong></p>
+        <button onclick="alert('General Admission ticket purchase coming soon!')">Buy Ticket</button>
+      </div>
+      <div class="ticket">
+        <h3>VIP Access</h3>
+        <p>Includes entry into the fenced water area with lifeguards and a swim-up bar!</p>
+        <p><strong>$199</strong></p>
+        <button onclick="alert('VIP ticket purchase coming soon!')">Buy VIP</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="merch" class="merch">
+    <h2>🛍️ Official Merch</h2>
+    <p>Grab your <strong>Past the Lake</strong> shirts at:</p>
+    <p><strong>Fountain Gate</strong> &amp; <strong>Chadstone Shopping Centres</strong></p>
+    <img src="Untitled Project - Artboard 1.png" alt="Past the Lake Festival Merchandise">
+  </section>
+
+  <section id="lineup">
+    <div class="lineup" id="lineupBox">
+      <h2>🎧 Line-up</h2>
+      <p>Featuring the full lineup from Beyond the Valley 2024/25:</p>
+      <button class="toggle-btn" id="toggleLineup">Show Full Lineup</button>
+      <ul>
+        <li>FISHER</li>
+        <li>Ice Spice</li>
+        <li>Chase & Status</li>
+        <li>Marlon Hoffstadt</li>
+        <li>Tinashe</li>
+        <li>Royel Otis</li>
+        <li>Sammy Virji</li>
+        <li>Sugababes</li>
+        <li>AJ Tracey</li>
+        <li>Denis Sulta</li>
+        <li>Natasha Bedingfield</li>
+        <li>horsegiirL</li>
+        <li>Confidence Man</li>
+        <li>Teenage Dads</li>
+        <li>KI/KI</li>
+        <li>DJ BORING</li>
+        <li>SG Lewis</li>
+        <li>JOY (Anonymous)</li>
+        <li>Tinlicker (DJ set)</li>
+        <li>Ben Hemsley</li>
+        <li>NEIL FRANCES</li>
+        <li>Lola Young</li>
+        <li>Ghetts</li>
+        <li>Flowdan & Neffa-T</li>
+        <li>Avalon Emerson</li>
+        <li>The Rions</li>
+        <li>BARKAA</li>
+        <li>Kita Alexander</li>
+        <li>The Grogans</li>
+        <li>The Terrys</li>
+        <li>Sycco</li>
+        <li>Malugi</li>
+        <li>Sam Alfred</li>
+        <li>Hannah Laing</li>
+        <li>Girls Don’t Sync</li>
+        <li>Oden & Fatzo (live)</li>
+        <li>Fish56Octagon</li>
+        <li>Sally C</li>
+        <li>LB aka LABAT</li>
+        <li>Franck</li>
+        <li>Chloé Caillet</li>
+        <li>Odd Mob</li>
+        <li>Anna Lunoe</li>
+        <li>Billie Marten</li>
+        <li>Nick Ward</li>
+        <li>Jersey</li>
+        <li>Sarah Story</li>
+        <li>Luke Alessi</li>
+        <li>Nina Las Vegas</li>
+        <li>Half Queen</li>
+        <li>MESSIE</li>
+        <li>Vv Pete</li>
+        <li>Laura King</li>
+        <li>Little Fritter</li>
+        <li>Jimi The Kween</li>
+        <li>Djanaba</li>
+        <li>tiffi</li>
+        <li>Ollie Lishman</li>
+        <li>WOLTERS</li>
+        <li>Marli</li>
+        <li>Ned Bennett</li>
+        <li>Stev Zar</li>
+        <li>Denim</li>
+        <li>Liz Cambage</li>
+        <li>Jewel Owusu</li>
+        <li>SOVBLKPSSY</li>
+        <li>Dijok</li>
+        <li>Kimboclat</li>
+        <li>Eva</li>
+        <li>Brown Suga Princess</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="info">
+    <h2>📅 Event Info</h2>
+    <p>Join us this summer for an unforgettable lakeside festival featuring top DJs, crystal-clear water, and the perfect beach vibe.</p>
+    <p>Follow us on social media for lineup announcements and updates!</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Past the Lake Festival | Website by YourName</p>
+    <p><a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">TikTok</a></p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleLineup');
+    const lineupBox = document.getElementById('lineupBox');
+
+    toggleBtn.addEventListener('click', () => {
+      lineupBox.classList.toggle('show');
+      toggleBtn.textContent = lineupBox.classList.contains('show')
+        ? 'Hide Lineup'
+        : 'Show Full Lineup';
+      if (lineupBox.classList.contains('show')) {
+        setTimeout(() => lineupBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+      }
+    });
+  </script>
+</body>
+</html>
